@@ -59,8 +59,8 @@
       sx = nsx;
       sy = nsy;
 
-      stepX = 0.1 * sx;
-      stepY = 0.1 * sy;
+      stepX = 0.06 * sx;
+      stepY = 0.06 * sy;
 
       // 启动新的动画
       animate();
@@ -74,7 +74,7 @@
   const handleDrag = () => {
     const moveElem = document.querySelector("#bar");
 
-    dragElem(moveElem, 80, onMove, onStop);
+    dragElem(moveElem, 90, onMove, onStop);
   };
 
   export let name;
@@ -83,13 +83,17 @@
 <style>
   .direction-control {
     position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 156px;
-    height: 156px;
+    bottom: 50px;
+    right: 50px;
+    width: 176px;
+    height: 176px;
     background: rgba(225, 225, 225, 0.4);
     border-radius: 50%;
     box-shadow: 0 0 15px rgba(215, 215, 215, 0.8);
+    user-select: none;
+  }
+  .direction * {
+    user-select: none;
   }
   .item {
     position: absolute;
@@ -116,8 +120,8 @@
     transform: translate(-10%, -50%);
   }
   .center {
-    width: 36px;
-    height: 36px;
+    width: 50px;
+    height: 50px;
     background: #f5f5f5;
     left: 50%;
     top: 50%;

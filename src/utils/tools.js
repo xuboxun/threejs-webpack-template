@@ -59,8 +59,7 @@ export const dragElem = (moveElem, max, onMove, onStop) => {
     return (current / max) * 10;
   };
 
-  //监听鼠标按下事件
-  document.addEventListener("mousedown", function(e) {
+  const onStart = (e) => {
     if (e.target === moveElem) {
       dragging = true; //激活拖拽状态
       const moveElemRect = moveElem.getBoundingClientRect();
@@ -71,17 +70,14 @@ export const dragElem = (moveElem, max, onMove, onStop) => {
       // console.log(moveElemRect.left, moveElemRect.top);
       // console.log(startX, startY);
     }
-  });
-
-  //监听鼠标放开事件
-  document.addEventListener("mouseup", function(e) {
+  }
+  const onEnd = function(e) {
     dragging = false;
     moveElem.style.transform = `translate(0, 0)`;
     onStop();
-  });
+  }
 
-  //监听鼠标移动事件
-  document.addEventListener("mousemove", function(e) {
+  const onProcess = function(e) {
     if (dragging) {
       let moveX = e.clientX - startX;
       let moveY = e.clientY - startY;
@@ -108,5 +104,31 @@ export const dragElem = (moveElem, max, onMove, onStop) => {
       const speedY = calcSpeed(moveY, maxY);
       onMove(dx, dy, speedX, speedY);
     }
+  }
+
+  //监听鼠标按下事件
+  document.addEventListener("mousedown", onStart);
+
+  //监听鼠标放开事件
+  document.addEventListener("mouseup", onEnd);
+
+  //监听鼠标移动事件
+  document.addEventListener("mousemove", onProcess);
+
+  document.addEventListener("touchstart", (event) => {
+    event.preventDefault()
+    onStart(event.touches[0])
+  });
+
+  // //监听鼠标放开事件
+  document.addEventListener("touchend", (event) => {
+    event.preventDefault()
+    onEnd(event.touches[0])
+  });
+
+  // //监听鼠标移动事件
+  document.addEventListener("touchmove", (event) => {
+    event.preventDefault()
+    onProcess(event.touches[0])
   });
 };

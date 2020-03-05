@@ -8,4 +8,9 @@ const app = new App({
   }
 });
 
+
+document.body.addEventListener('touchmove', function (e) {
+    e.preventDefault(); 
+}, {passive: false}); 
+
 console.log(app);
