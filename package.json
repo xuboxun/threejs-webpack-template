@@ -32,6 +32,6 @@
   "dependencies": {
     "node-sass": "^4.13.1",
     "svelte": "^3.19.1",
-    "three": "^0.114.0"
+    "three": "^0.125.0"
   }
 }
